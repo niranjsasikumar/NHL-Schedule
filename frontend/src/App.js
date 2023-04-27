@@ -41,7 +41,6 @@ function App() {
 
   return (
     <div>
-
       <div className="bg-dark text-white py-5">
         <div className="container">
           <h1 className="h1 mb-4">NHL Schedule</h1>
