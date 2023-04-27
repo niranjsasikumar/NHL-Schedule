@@ -41,25 +41,9 @@ app.get("/teams", async (req, res) => {
   }
 });
 
-app.get("/debug", async (req, res) => {
-  try {
-    var today = new Date();
-    const offset = today.getTimezoneOffset();
-    today = new Date(today.getTime() - (offset*60*1000));
-    const startDate = today.toISOString().substring(0, 10);
+app.use(express.static(path.join(__dirname + "/public")));
 
-    const endDate = new Date(today.setDate(today.getDate() + 7)).toISOString().substring(0, 10);
-
-    res.json({ "startDate" : startDate, "endDate" : endDate });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "An error occurred while retrieving the NHL teams information." });
-  }
-});
-
-app.use(express.static(path.join(__dirname + "/public")))
-
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log("Connected to backend.");
