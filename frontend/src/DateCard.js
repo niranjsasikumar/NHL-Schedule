@@ -7,6 +7,7 @@ function DateCard(props) {
     weekday: "short",
     month: "short",
     day: "numeric",
+    year: "numeric",
     timeZone: "UTC"
   });
 

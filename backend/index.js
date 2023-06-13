@@ -7,18 +7,15 @@ const app = express();
 
 app.use(cors());
 
-app.get("/schedule/:team/:date", async (req, res) => {
+app.get("/schedule/:team/:start/:end", async (req, res) => {
   try {
-    const { team, date } = req.params;
-
-    var today = new Date(date);
-    const endDate = new Date(today.setDate(today.getDate() + 7)).toISOString().substring(0, 10);
+    const { team, start, end } = req.params;
 
     var response = null;
     if (team == "all") {
-      response = await axios.get("https://statsapi.web.nhl.com/api/v1/schedule?startDate=" + date + "&endDate=" + endDate);
+      response = await axios.get("https://statsapi.web.nhl.com/api/v1/schedule?startDate=" + start + "&endDate=" + end);
     } else {
-      response = await axios.get("https://statsapi.web.nhl.com/api/v1/schedule?teamId=" + team + "&startDate=" + date + "&endDate=" + endDate);
+      response = await axios.get("https://statsapi.web.nhl.com/api/v1/schedule?teamId=" + team + "&startDate=" + start + "&endDate=" + end);
     }
 
     const schedule = response.data;
@@ -41,9 +38,7 @@ app.get("/teams", async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname + "/public")));
-
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
   console.log("Connected to backend.");
