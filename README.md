@@ -1,4 +1,4 @@
-# NHL Schedule
+# NHL Games Schedule Web Application
 
 The web application is hosted [here](https://nhlschedule.herokuapp.com/).
 
